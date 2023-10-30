@@ -1,8 +1,7 @@
 import random
+from .structures import *
 
-nucleotides = ["A", "C", "G", "T"]
-
-
+# generate sequance
 def seq_generator(len):
     return ''.join([random.choice(nucleotides)
                     for nucleotide
@@ -16,4 +15,12 @@ def seq_validation(dna_sequance):
         if nucleotide not in nucleotides:
             return False
     return temp_nucleotide
+
+#DNA Transcription
+def transcription(sequence):
+    return sequence.replace("T", "U")
+
+# DNA Raplication
+def reverse_sequence(sequence):
+    return ''.join([dna_reverse_complement[nuc] for nuc in sequence])
 
