@@ -1,6 +1,7 @@
 import random
 from dna_toolkits.structures import *
 import collections
+import utilities as utl
 
 # generate sequance
 def seq_generator(len):
@@ -57,3 +58,14 @@ def subsequence_gc_content(sequence, section=20):
             'gc_content': subseq_gc_content
         }
     return result
+
+def compute_max_gc_content(file_path):
+    max_gc_dict = {}
+    FASTA_dict = utl.FASTA_to_dict(file_path)
+    calculate_values_gcc = {key: gc_content(value) for (key, value) in FASTA_dict.items()}
+    max_gc = max(calculate_values_gcc, key=calculate_values_gcc.get)
+    #need to add gc-content percentage too!!!!!!!!!!!
+    max_gc_dict[max_gc] = FASTA_dict[max_gc]
+    #f'{max_gc[1:]}\n{calculate_values_gcc[max_gc]}'
+    return max_gc_dict
+
