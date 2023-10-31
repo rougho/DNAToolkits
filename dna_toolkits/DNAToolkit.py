@@ -46,3 +46,14 @@ def complement_sequence(sequence):
 def gc_content(sequence):
     '''percentage of nitrogenous bases in a DNA/RNA molecule that are either Guanine or Cytosine'''
     return (sequence.count('C') + sequence.count('G')) / len(sequence) * 100
+
+def subsequence_gc_content(sequence, section=20):
+    result = {}
+    for i in range(0, len(sequence) - section + 1, section):
+        sub_sequence = sequence[i:i+section]
+        subseq_gc_content = gc_content(sub_sequence)
+        result[sub_sequence] = {
+            'position': i,
+            'gc_content': subseq_gc_content
+        }
+    return result
