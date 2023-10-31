@@ -1,13 +1,10 @@
-from dna_toolkits import DNAToolkit
-import collections
+def count(seq):
+    '''Count frequency of the nucleotides and return a dictionary, DNA sequence as attribute(String)'''
+    tmp = {'A':0, 'C':0, 'G':0, 'T':0}
+    for nuc in seq:
+        tmp[nuc] += 1
+    return tmp
 
-def count_nucleotide_frequency(sequence):
-    try:
-        return dict(collections.Counter(sequence))
-    except:
-        if DNAToolkit.seq_validation(sequence) is False:
-           return "Wrong Sequance"
-        
-def print_nucleotides_frequency(sequence_dict):
-    for key in sequence_dict:
-        print(f"{key} : {sequence_dict[key]}")
+seq = "Replace Your Sequence Here!"
+result = count(seq)
+print(' '.join([str(val) for key, val in result.items()]))
