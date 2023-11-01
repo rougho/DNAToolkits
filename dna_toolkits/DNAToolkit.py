@@ -54,7 +54,7 @@ def subsequence_gc_content(sequence, section=20):
         sub_sequence = sequence[i:i+section]
         subseq_gc_content = gc_content(sub_sequence)
         result[sub_sequence] = {
-            'position': i,
+            'position': i+1,
             'gc_content': subseq_gc_content
         }
     return result
@@ -65,9 +65,25 @@ def compute_max_gc_content(file_path):
     calculate_values_gcc = {key: gc_content(value) for (key, value) in FASTA_dict.items()}
     max_gc = max(calculate_values_gcc, key=calculate_values_gcc.get)
     max_gc_full = {
-        'Label' : max_gc[1:],
-        'GC-Content' : calculate_values_gcc[max_gc],
-        'Sequence ' : FASTA_dict[max_gc]
+        'label' : max_gc[1:],
+        'gc_content' : calculate_values_gcc[max_gc],
+        'sequence' : FASTA_dict[max_gc]
         }
     return max_gc_full
 
+def sequence_translator(sequence, initialize_position = 0):
+    return [DNA_Codons[sequence[position:position + 3]]
+                        for position in range(initialize_position,
+                                              len(sequence) - 2, 3)]
+
+def codon_frequency(sequence, aminoacid):
+    temp_list = []
+    for i in range(0, len(sequence) - 2, 3):
+        if DNA_Codons[sequence[i:i + 3]] == aminoacid:
+            temp_list.append(sequence[i:i + 3])
+    frequency_dictionary = dict(collections.Counter(temp_list))
+    total_wight = sum(frequency_dictionary.values())
+    for seq in frequency_dictionary:
+        frequency_dictionary[seq] = round(frequency_dictionary[seq] 
+                                          / total_wight, 2)
+    return frequency_dictionary
