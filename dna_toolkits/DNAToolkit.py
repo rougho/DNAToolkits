@@ -64,8 +64,10 @@ def compute_max_gc_content(file_path):
     FASTA_dict = utl.FASTA_to_dict(file_path)
     calculate_values_gcc = {key: gc_content(value) for (key, value) in FASTA_dict.items()}
     max_gc = max(calculate_values_gcc, key=calculate_values_gcc.get)
-    #need to add gc-content percentage too!!!!!!!!!!!
-    max_gc_dict[max_gc] = FASTA_dict[max_gc]
-    #f'{max_gc[1:]}\n{calculate_values_gcc[max_gc]}'
-    return max_gc_dict
+    max_gc_full = {
+        'Label' : max_gc[1:],
+        'GC-Content' : calculate_values_gcc[max_gc],
+        'Sequence ' : FASTA_dict[max_gc]
+        }
+    return max_gc_full
 
