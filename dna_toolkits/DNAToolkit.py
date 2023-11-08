@@ -3,6 +3,7 @@ from dna_toolkits.structures import *
 import collections
 import utilities as utl
 
+
 # generate sequance
 
 
@@ -139,3 +140,22 @@ def proteins_from_reading_frame(aminoacid_sequnce):
             for i in range(len(current_protein)):
                 current_protein[i] += aminoacid
     return proteins
+
+
+def all_proteins_from_reading_drames(sequence, startReadingPosition=0, endReadingPosition=0, ordered=False):
+    '''Compute all possibe proteins from all open reading frames'''
+    if endReadingPosition > startReadingPosition:
+        readingFrames = open_reading_frames(
+            sequence[startReadingPosition: endReadingPosition])
+    else:
+        readingFrames = open_reading_frames(sequence)
+
+    result = []
+    for rf in readingFrames:
+        proteins = proteins_from_reading_frame(readingFrames)
+        for p in proteins:
+            result.append(p)
+
+    if ordered:
+        return sorted(result, key=len, reverse=True)
+    return result
