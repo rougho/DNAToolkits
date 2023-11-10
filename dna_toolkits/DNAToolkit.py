@@ -142,7 +142,7 @@ def proteins_from_reading_frame(aminoacid_sequnce):
     return proteins
 
 
-def all_proteins_from_reading_drames(sequence, startReadingPosition=0, endReadingPosition=0, ordered=False):
+def all_proteins_from_reading_frames(sequence, startReadingPosition=0, endReadingPosition=0, ordered=False):
     '''Compute all possibe proteins from all open reading frames'''
     if endReadingPosition > startReadingPosition:
         readingFrames = open_reading_frames(

@@ -1,6 +1,9 @@
 # Main Toolkits
+from biopython import retrive_festa_seq as ncbi
 from dna_toolkits import DNAToolkit as toolkit
 import utilities as utl
+from biopython import ncbi_api
+
 file = "/home/rohi/Home/B/bioinformatics/data/computing_gc_contanct_test_data.txt"
 dna_sequence = toolkit.seq_validation(toolkit.seq_generator(50))
 counted_sequence_dict = toolkit.count_nucleotide_frequency(dna_sequence)
@@ -41,5 +44,21 @@ counted_sequence_dict = toolkit.count_nucleotide_frequency(dna_sequence)
 
 # print(toolkit.proteins_from_reading_frame(test_rf))
 
-ids = utl.extract_ids('Homo sapiens insulin')
-print(ids)
+# ids = ncbi_api.extract_ids('Homo sapiens insulin')
+# print(ids)
+
+# print(api.api_call('Homo sapiens insulin', 'nuccore'))
+# print(ncbi_api.extract_fasta('Homo sapiens ins', 'nuccore'))
+
+
+# record = ncbi.find_record('NM_000207.3')
+# ncbiSequence = record['sequence']
+
+# print(ncbiSequence)
+for protein in toolkit.all_proteins_from_reading_frames('AGCCCTCCAGGACAGGCTGCATCAGAAGAGGCCATCAAGCAGATCACTGTCCTTCTGCCATGGCCCTGTGGATGCGCCTCCTGCCCCTGCTGGCGCTGCTGGCCCTCTGGGGACCTGACCCAGCCGCAGCCTTTGTGAACCAACACCTGTGCGGCTCACACCTGGTGGAAGCTCTCTACCTAGTGTGCGGGGAACGAGGCTTCTTCTACACACCCAAGACCCGCCGGGAGGCAGAGGACCTGCAGGTGGGGCAGGTGGAGCTGGGCGGGGGCCCTGGTGCAGGCAGCCTGCAGCCCTTGGCCCTGGAGGGGTCCCTGCAGAAGCGTGGCATTGTGGAACAATGCTGTACCAGCATCTGCTCCCTCTACCAGCTGGAGAACTACTGCAACTAGACGCAGCCCGCAGGCAGCCCCACACCCGCCGCCTCCTGCACCGAGAGAGATGGAATAAAGCCCTTGAACCAGC', 0, 0, True):
+    print(f'{protein}')
+
+
+# print(toolkit.all_proteins_from_reading_frames(ncbiSequence, 0, 0, True))
+
+# print(type(ncbiSequence))

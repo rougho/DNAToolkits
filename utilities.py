@@ -1,7 +1,5 @@
 import dna_toolkits.DNAToolkit as toolkit
-import requests
-import xml.etree.ElementTree as ET
-from urllib.parse import quote_plus
+
 
 RED = '\033[91m'
 RESET = '\033[0m'
@@ -88,19 +86,3 @@ def print_orfs(orfs_list):
     for i in range(len(orfs_list)):
         orfs_string += orfs_list[i]
     return orfs_string
-
-
-def extract_ids(search_term):
-    # Encode the search term for URL
-    encoded_search_term = quote_plus(search_term)
-
-    base_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
-    search_url = f'{base_url}esearch.fcgi?db=nuccore&term={encoded_search_term}&retmode=xml'
-    response = requests.get(search_url)
-    root = ET.fromstring(response.content)
-
-    ids = []
-    for id_elem in root.findall('.//IdList/Id'):
-        ids.append(id_elem.text)
-
-    return ids
