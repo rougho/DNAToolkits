@@ -66,4 +66,5 @@
 from dna_toolkits.bio_seq import BioSeq
 
 test_dna = BioSeq()
+test_dna.seq_generator()
 print(test_dna.seq_info())
